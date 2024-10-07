@@ -239,7 +239,7 @@ ENDFOREACH ()
 SET (Boost_USE_STATIC_LIBS ON)
 SET (Boost_USE_MULTITHREADED ON)
 
-FIND_PACKAGE ("Boost" "1.82" REQUIRED COMPONENTS "system" "filesystem" "regex" "log" "stacktrace_backtrace")
+FIND_PACKAGE ("Boost" "1.82" REQUIRED COMPONENTS "system" "filesystem" "regex" "log" "stacktrace_basic")
 
 ## Stacktrace definitions
 
@@ -254,7 +254,8 @@ ELSEIF (CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
 
     # Example path adjustment for aarch64, adjust the path as needed
     SET (BACKTRACE_INCLUDE "/usr/lib/gcc/aarch64-linux-gnu/9/include/backtrace.h")
-  
+ELSEIF (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # Apple Silicon
+    SET  (BACKTRACE_INCLUDE "/opt/homebrew/Cellar/boost/1.85.0/include/boost/stacktrace.hpp")
 ELSE ()
 
     MESSAGE (FATAL_ERROR "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}")
