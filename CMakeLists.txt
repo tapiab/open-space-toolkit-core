@@ -30,10 +30,6 @@ OPTION (BUILD_WITH_CXX_17 "Build with C++ 17 support." OFF)
 
 CMAKE_MINIMUM_REQUIRED (VERSION "2.8.12" FATAL_ERROR)
 
-### Paths
-
-SET (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake")
-
 ### Policies
 
 CMAKE_POLICY (SET "CMP0048" NEW)
@@ -471,22 +467,22 @@ ENDIF ()
 ### Configuration
 
 CONFIGURE_FILE (
-    "${CMAKE_MODULE_PATH}/${PROJECT_NAME}Config.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake/${PROJECT_NAME}Config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
     @ONLY)
 
 CONFIGURE_FILE (
-    "${CMAKE_MODULE_PATH}/${PROJECT_NAME}ConfigVersion.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake/${PROJECT_NAME}ConfigVersion.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
     @ONLY)
 
-INSTALL (FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" DESTINATION "${INSTALL_LIB}/${PROJECT_NAME}" COMPONENT "libraries")
-INSTALL (FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake" DESTINATION "${INSTALL_LIB}/${PROJECT_NAME}" COMPONENT "libraries")
+INSTALL (FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" DESTINATION "${INSTALL_LIB}/cmake/${PROJECT_NAME}" COMPONENT "libraries")
+INSTALL (FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake" DESTINATION "${INSTALL_LIB}/cmake/${PROJECT_NAME}" COMPONENT "libraries")
 
 ### Uninstall
 
 CONFIGURE_FILE (
-    "${CMAKE_MODULE_PATH}/UninstallTarget.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake/UninstallTarget.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/UninstallTarget.cmake"
     IMMEDIATE @ONLY)
 
